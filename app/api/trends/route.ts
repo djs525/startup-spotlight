@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import { GET as getHnTrends } from './hn/route';
+import { GET as getRedditTrends } from './reddit/route';
 import path from 'path';
 import fs from 'fs';
 
@@ -17,18 +19,14 @@ export async function GET() {
     const configData = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     const currentWeek = configData.weeks[weekInMonth - 1] || configData.weeks[0];
 
-    // Fetch from both HN and Reddit in parallel
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000';
-
+    // Instead of doing expensive/flaky HTTP fetches to ourselves, directly invoke the route handlers!
     const [hnResponse, redditResponse] = await Promise.all([
-      fetch(`${baseUrl}/api/trends/hn`),
-      fetch(`${baseUrl}/api/trends/reddit`),
+      getHnTrends(),
+      getRedditTrends(),
     ]);
 
-    const hnData = hnResponse.ok ? await hnResponse.json() : { stories: [], error: 'Failed to fetch HN' };
-    const redditData = redditResponse.ok ? await redditResponse.json() : { posts: [], error: 'Failed to fetch Reddit' };
+    const hnData = hnResponse.status === 200 ? await hnResponse.json() : { stories: [], error: 'Failed to fetch HN' };
+    const redditData = redditResponse.status === 200 ? await redditResponse.json() : { posts: [], error: 'Failed to fetch Reddit' };
 
     return NextResponse.json({
       startup: {

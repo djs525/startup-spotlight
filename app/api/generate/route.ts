@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { GET as getTrends } from '../trends/route';
 import path from 'path';
 import fs from 'fs';
 
@@ -12,15 +13,11 @@ export async function GET() {
       );
     }
 
-    // Fetch trends
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000';
-
-    const trendsResponse = await fetch(`${baseUrl}/api/trends`);
-    if (!trendsResponse.ok) {
+    // Fetch trends directly via the handler rather than a network request
+    const trendsResponse = await getTrends();
+    if (trendsResponse.status !== 200) {
       return NextResponse.json(
-        { error: 'Failed to fetch trends' },
+        { error: 'Failed to fetch trends internally' },
         { status: 500 }
       );
     }
