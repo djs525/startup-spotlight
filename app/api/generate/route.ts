@@ -30,7 +30,7 @@ export async function GET() {
     // Build prompt for Gemini
     const systemPrompt = `You are an elite B2B SaaS LinkedIn ghostwriter specializing in Vertical AI & CRM Automation for an audience of founders, sales operators, and RevOps professionals.
 
-Your task is to generate 8 unique, high-engagement LinkedIn posts based on the latest trends and our brand style guide.
+Your task is to generate 5 unique, high-engagement LinkedIn posts based on the latest trends and our brand style guide.
 
 Here is your strictly enforced STYLE GUIDE outlining the formatting, tone, and hooks that yield top 1% engagement:
 ${JSON.stringify(styleGuideData, null, 2)}
@@ -40,7 +40,7 @@ CRITICAL INSTRUCTIONS:
 - DIRECTLY cite specific startups, products, and companies from the provided HN/Reddit trends. Do not invent details.
 - Use real numbers and insights from the trends.
 - NO fluff: strictly avoid words like "synergy", "leverage", "disruptive", "unlock", "empower", "seamless", "delve", and "landscape".
-- SHORT paragraphs: 1-2 sentences max. Use line breaks strategically.
+- LENGTH & FORMATTING: Each post MUST be fully fleshed out between 150 and 300 words. Do NOT generate single-sentence posts. Write 4-6 short paragraphs (1-2 sentences each), utilizing strategic line breaks.
 - The tone should read like a direct Slack message from a practitioner who knows what they are talking about.
 
 THE TRENDS CONTAIN REAL STARTUP NAMES: Use them. Reference Klipy, Dex, OpenClaw, Rownd, BasaltCRM, or whatever is in the active trends payload by name when relevant.
@@ -50,16 +50,15 @@ Return ONLY valid JSON (no markdown, no code blocks):
 {
   "posts": [
     {
-      "post": "full post text here",
+      "post": "Paragraph one goes here.\\n\\nParagraph two goes here (150+ words total)...",
       "hook_type": "contrarian_claim|number_or_stat|short_punchy_sentence|question|bold_statement",
       "credibility_moves": ["named_company", "specific_numbers", "named_tool"],
-      "word_count": 142
-    },
-    ...
+      "word_count": 185
+    }
   ]
 }`;
 
-    const userPrompt = `Generate 8 LinkedIn posts using this context. CRITICAL: Reference the specific startup names and products listed below, and wrap them in a personal observation or hard-earned lesson. Don't generalize—name them explicitly.
+    const userPrompt = `Generate 5 LinkedIn posts using this context. CRITICAL: Reference the specific startup names and products listed below, and wrap them in a personal observation or hard-earned lesson. Don't generalize—name them explicitly.
 
 WEEK FOCUS & VERTICAL:
 ${JSON.stringify(trendsData.startup, null, 2)}
@@ -76,11 +75,12 @@ ${trendsData.trends.reddit
 
 EXECUTION REMINDERS:
 - Tone: Practitioner-to-practitioner. Hook the reader immediately.
-- Format: 150-300 words per post. Short paragraphs (1-2 sentences).
+- Format: ABSOLUTE MINIMUM 150 words per post. Write 4-6 distinct short paragraphs.
+- JSON STRICTNESS: Use "\\n\\n" for paragraph breaks inside strings! NEVER use raw unescaped physical line breaks inside the "post" string or JSON.parse will crash.
 - Storytelling: Every single post MUST convey a compelling core message anchored in a relatable personal story or observation. Make it feel authentic, not like AI slop.
 - Output: Strict JSON format matching the schema requested.
 
-NOW GENERATE 8 POSTS. Make each one distinct. Ground them in the trends above, not in invented scenarios.`;
+NOW GENERATE 5 POSTS. Make each one distinct. Ground them in the trends above, not in invented scenarios.`;
 
     // Call Gemini API with fallback models
     const models = [
@@ -114,7 +114,7 @@ NOW GENERATE 8 POSTS. Make each one distinct. Ground them in the trends above, n
                 temperature: 0.7,
                 topK: 40,
                 topP: 0.95,
-                maxOutputTokens: 2048,
+                maxOutputTokens: 8192,
                 responseMimeType: "application/json",
               },
             }),
