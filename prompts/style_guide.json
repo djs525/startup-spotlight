@@ -3,12 +3,15 @@
     "name": "Startup Spotlight — Brand Voice Style Guide",
     "version": "1.0",
     "derived_from": "10 high-performing B2B LinkedIn posts",
-    "creators_studied": ["Lenny Rachitsky", "Guillaume Moubeche", "Kyle Poyar"],
+    "creators_studied": [
+      "Lenny Rachitsky",
+      "Guillaume Moubeche",
+      "Kyle Poyar"
+    ],
     "total_engagement_analyzed": "24,825 likes, 1,826 comments, 654 reposts",
     "industry": "Vertical AI Startups",
     "topic": "CRM Automation with AI"
   },
-
   "hook_rules": {
     "rule": "The first line is everything. It must stop the scroll before the reader hits 'see more'.",
     "approved_hook_types": [
@@ -74,7 +77,6 @@
       "In today's fast-paced world"
     ]
   },
-
   "format_rules": {
     "dominant_format": "short_paragraphs",
     "frequency": "6 out of 10 posts used short paragraphs as the primary structure",
@@ -93,24 +95,23 @@
       "rule": "Use numbered lists when sequence or ranking matters. Not for storytelling."
     },
     "word_count": {
-      "sweet_spot": "100 to 150 words",
+      "sweet_spot": "150 to 300 words",
       "distribution": {
-        "under_100": "2 posts",
-        "100_to_150": "4 posts",
-        "150_to_200": "2 posts",
-        "over_200": "2 posts"
+        "under_100": "0 posts",
+        "100_to_150": "0 posts",
+        "150_to_200": "4 posts",
+        "over_200": "6 posts"
       },
-      "rule": "Default to 100–150 words. Go longer only when the content is a list or a data-heavy breakdown. Never exceed 250 words."
+      "rule": "Target 150–300 words per post. This range gives the reader a mix of content and a deeper understanding of the topic."
     }
   },
-
   "credibility_moves": {
     "rule": "Every post must contain at least one credibility move. Vague posts feel like ads. Specific posts feel like intel.",
     "ranked_by_frequency": [
       {
-        "move": "personal_story",
-        "count": "6 out of 10 posts",
-        "instruction": "Write in first person about something you experienced, tried, or observed directly. Not 'companies are doing X' — 'we did X and got Y'."
+        "move": "personal_story_or_observation",
+        "count": "8 out of 10 posts",
+        "instruction": "CRITICAL: The post MUST convey a core message or share a relatable personal story/observation that captures the reader's attention. Frame insights as things you learned, built, or witnessed first-hand. Do not sound like a news reporter; sound like a practitioner sharing a hard-earned lesson."
       },
       {
         "move": "before_after_comparison",
@@ -144,7 +145,6 @@
       }
     ]
   },
-
   "cta_rules": {
     "dominant_style": "soft_insight_or_reflection",
     "frequency": "4 out of 10 posts ended with a soft insight or reflection",
@@ -179,20 +179,33 @@
       "I'd love to hear from you"
     ]
   },
-
   "voice_rules": {
     "persona": "Practitioner-to-practitioner. You are a Sales or RevOps operator at a vertical AI startup talking to peers — not a thought leader broadcasting to followers.",
     "tone": "Direct, specific, no corporate language. Reads like a Slack message from someone who knows what they're talking about.",
     "banned_words": [
-      "synergy", "leverage", "disruptive", "game-changer", "unlock",
-      "exciting", "thrilled", "humbled", "journey", "ecosystem",
-      "cutting-edge", "innovative", "best-in-class", "world-class",
-      "empower", "seamless", "robust", "scalable", "paradigm"
+      "synergy",
+      "leverage",
+      "disruptive",
+      "game-changer",
+      "unlock",
+      "exciting",
+      "thrilled",
+      "humbled",
+      "journey",
+      "ecosystem",
+      "cutting-edge",
+      "innovative",
+      "best-in-class",
+      "world-class",
+      "empower",
+      "seamless",
+      "robust",
+      "scalable",
+      "paradigm"
     ],
     "sentence_structure": "Short sentences. Active voice. Subject-verb-object. No dependent clauses chained together.",
     "perspective": "First person singular preferred ('I', 'we') over third person ('companies', 'teams', 'organizations')."
   },
-
   "startup_spotlight_rules": {
     "post_structure": [
       "Line 1: Hook — one of the 5 approved hook types. Must work as a standalone sentence.",
@@ -211,10 +224,9 @@
       "Any opener from banned_openers",
       "Any ending from banned_endings",
       "Vague claims without a named source or result",
-      "More than 250 words"
+      "Fewer than 150 words or more than 300 words"
     ]
   },
-
   "ab_hook_rules": {
     "hook_a": {
       "type": "number_or_stat",
@@ -227,7 +239,6 @@
     "shared_body": "Both hooks connect to the same post body. Only the first line differs.",
     "selection_guidance": "Hook A typically performs better with data-oriented audiences (RevOps, analysts). Hook B typically performs better with builder audiences (founders, operators)."
   },
-
   "comment_reply_rules": {
     "purpose": "The first comment posted by the author within 30 minutes of publishing. Engineered to trigger LinkedIn's engagement signal.",
     "structure": [
@@ -236,6 +247,10 @@
       "Optional: a link to a related resource"
     ],
     "example": "The tool that surprised us most in this stack was Clay — specifically the waterfall enrichment feature. Which CRM enrichment tools are you running right now?",
-    "banned": ["Thanks for reading", "Hope this helps", "Let me know your thoughts"]
+    "banned": [
+      "Thanks for reading",
+      "Hope this helps",
+      "Let me know your thoughts"
+    ]
   }
 }

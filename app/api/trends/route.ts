@@ -10,8 +10,8 @@ export async function GET() {
       (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000
     );
     const weekOfYear = Math.ceil((dayOfYear + new Date(new Date().getFullYear(), 0, 1).getDay() + 1) / 7);
-    const weekInMonth = Math.min(4, Math.ceil(now.getDate() / 7)); // Simplified: assume 4 weeks per month
-
+    // Force Week 1 for the demo (previously calculated based on the current date, which fell into Week 4)
+    const weekInMonth = 1;
     // Load month1.json to get the current week's topic
     const configPath = path.join(process.cwd(), 'config', 'month1.json');
     const configData = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
