@@ -118,6 +118,7 @@ NOW GENERATE 8 POSTS. Make each one distinct. Ground them in the trends above, n
                 topK: 40,
                 topP: 0.95,
                 maxOutputTokens: 2048,
+                responseMimeType: "application/json",
               },
             }),
           }
@@ -159,84 +160,30 @@ NOW GENERATE 8 POSTS. Make each one distinct. Ground them in the trends above, n
     // Parse JSON from response
     let posts: any;
     try {
-      // Strip markdown code blocks
-      let cleanContent = generatedContent;
+      let cleanContent = generatedContent.replace(/```json\s*/ig, '').replace(/```\s*/g, '').trim();
 
-      // Remove ``` markers and the word "json"
-      cleanContent = cleanContent.replace(/```json\s*/g, '').replace(/```\s*/g, '');
+      // Find the outermost JSON container (could be array or object)
+      const firstCurly = cleanContent.indexOf('{');
+      const firstSquare = cleanContent.indexOf('[');
+      const lastCurly = cleanContent.lastIndexOf('}');
+      const lastSquare = cleanContent.lastIndexOf(']');
 
-      // Find the first { and last }
-      const firstBrace = cleanContent.indexOf('{');
-      const lastBrace = cleanContent.lastIndexOf('}');
+      // Identify the first occurrence that's valid
+      const startIdx = Math.min(
+        firstCurly === -1 ? Infinity : firstCurly,
+        firstSquare === -1 ? Infinity : firstSquare
+      );
 
-      if (firstBrace === -1 || lastBrace === -1) {
-        throw new Error('No JSON braces found');
+      const endIdx = Math.max(lastCurly, lastSquare);
+
+      if (startIdx === Infinity || endIdx === -1) {
+        throw new Error('No JSON objects or arrays found. Raw text: ' + generatedContent);
       }
 
-      let jsonString = cleanContent.substring(firstBrace, lastBrace + 1);
+      let jsonString = cleanContent.substring(startIdx, endIdx + 1);
 
-      // Try to parse
-      try {
-        const parsed = JSON.parse(jsonString);
-        posts = parsed.posts || parsed;
-      } catch (initialError) {
-        // If parsing fails, try to salvage what we can
-        // Count open vs close braces to find incomplete nesting
-        let braceCount = 0;
-        let safeEnd = jsonString.length;
-
-        for (let i = jsonString.length - 1; i >= 0; i--) {
-          if (jsonString[i] === '}') braceCount++;
-          else if (jsonString[i] === '{') braceCount--;
-
-          // When we've balanced braces going backwards, we found a good spot
-          if (braceCount === 0 && (jsonString[i] === '}' || jsonString[i] === ']')) {
-            // Make sure we're after a complete value
-            let truncated = jsonString.substring(0, i + 1);
-
-            // Ensure the JSON ends properly
-            if (truncated.endsWith(']')) {
-              truncated = truncated + '\n}';
-            } else if (truncated.endsWith('}')) {
-              // Check if this is the last post in posts array
-              if (truncated.includes('"posts"')) {
-                truncated = truncated + '\n}';
-              }
-            }
-
-            try {
-              posts = JSON.parse(truncated);
-              posts = posts.posts || posts;
-              console.log('✓ Recovered partial JSON response');
-              break;
-            } catch {
-              // Continue trying
-            }
-          }
-        }
-
-        if (!posts) {
-          // Last resort: try to parse just the complete posts we have
-          const postsMatch = jsonString.match(/"posts":\s*\[([\s\S]*)\]/);
-          if (postsMatch) {
-            // Extract the array content
-            let arrayContent = '[' + postsMatch[1];
-            // Try to find the last complete object
-            const lastCompletePost = arrayContent.lastIndexOf('}');
-            if (lastCompletePost !== -1) {
-              const truncatedArray = arrayContent.substring(0, lastCompletePost + 1) + ']';
-              posts = { posts: JSON.parse(truncatedArray) };
-              posts = posts.posts;
-            }
-          }
-        }
-
-        if (!posts) {
-          throw initialError;
-        }
-      }
-
-      // Ensure posts is an array
+      const parsed = JSON.parse(jsonString);
+      posts = parsed.posts || parsed;
       if (!Array.isArray(posts)) {
         posts = [posts];
       }
@@ -244,7 +191,7 @@ NOW GENERATE 8 POSTS. Make each one distinct. Ground them in the trends above, n
     } catch (parseError) {
       console.error('JSON Parse Error:', parseError);
       return NextResponse.json(
-        { error: 'Failed to parse generated posts', raw: generatedContent.substring(0, 2000) },
+        { error: 'Failed to parse generated posts', raw: generatedContent.substring(0, 500) },
         { status: 500 }
       );
     }
