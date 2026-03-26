@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "name": "Startup Spotlight — Brand Voice Style Guide",
+    "version": "1.0",
+    "derived_from": "10 high-performing B2B LinkedIn posts",
+    "creators_studied": ["Lenny Rachitsky", "Guillaume Moubeche", "Kyle Poyar"],
+    "total_engagement_analyzed": "24,825 likes, 1,826 comments, 654 reposts",
+    "industry": "Vertical AI Startups",
+    "topic": "CRM Automation with AI"
+  },
+
+  "hook_rules": {
+    "rule": "The first line is everything. It must stop the scroll before the reader hits 'see more'.",
+    "approved_hook_types": [
+      {
+        "type": "short_punchy_sentence",
+        "frequency": "3 out of 10 posts — most common pattern",
+        "description": "A single sentence so short it feels incomplete. Forces the reader to keep going.",
+        "examples": [
+          "Startups don't die because they fail.",
+          "*Steal this brilliant move from Canva*",
+          "Update: I'm now a full-time solopreneur!!"
+        ],
+        "why_it_works": "Brevity creates a gap. The reader's brain needs to close it."
+      },
+      {
+        "type": "contrarian_claim",
+        "frequency": "3 out of 10 posts — tied for most common",
+        "description": "A statement that directly contradicts conventional wisdom. No hedge, no qualification.",
+        "examples": [
+          "The best hire I ever made didn't send a resume",
+          "I believe strongly that all of your manager challenges are either directly or indirectly about the skip lead—your manager's manager.",
+          "Over the past two months I've interviewed more than a dozen founders from breakout AI-native companies. What they do differently"
+        ],
+        "why_it_works": "Disagreement triggers curiosity. The reader wants to know if you're right."
+      },
+      {
+        "type": "number_or_stat",
+        "frequency": "2 out of 10 posts",
+        "description": "A hard, specific number in the first line. Not a range. Not 'many'. A real figure.",
+        "examples": [
+          "Revolut is currently valued at $100B+.",
+          "Here is your SaaS growth cheat sheet"
+        ],
+        "why_it_works": "Specificity signals credibility. Round numbers feel made up. Exact numbers feel researched."
+      },
+      {
+        "type": "question",
+        "frequency": "1 out of 10 posts",
+        "description": "A direct question to the reader — but only when it involves them personally.",
+        "examples": [
+          "On LinkedIn, X, and in my newsletter Slack, I asked you: What's a product or tool you vibe-coded that you actually use regularly in your work or life?"
+        ],
+        "why_it_works": "Pulls the reader into the post as a participant, not a spectator. Use sparingly."
+      },
+      {
+        "type": "bold_statement",
+        "frequency": "1 out of 10 posts",
+        "description": "A declarative statement that sets up a reveal or inside look.",
+        "examples": [
+          "When a founder tells you that they did a '7 figure' exit and they don't want to tell you the actual number..."
+        ],
+        "why_it_works": "Creates an implied story. The reader wants the rest."
+      }
+    ],
+    "banned_openers": [
+      "I'm excited to share",
+      "Thrilled to announce",
+      "Hot take:",
+      "Unpopular opinion:",
+      "I'm humbled",
+      "After much reflection",
+      "As we head into",
+      "In today's fast-paced world"
+    ]
+  },
+
+  "format_rules": {
+    "dominant_format": "short_paragraphs",
+    "frequency": "6 out of 10 posts used short paragraphs as the primary structure",
+    "paragraph_length": "1 to 2 sentences maximum per paragraph. Never 3.",
+    "line_breaks": {
+      "preferred": "moderate — not every sentence on its own line, but no walls of text",
+      "note": "7 out of 10 posts used moderate spacing. Very airy (1 sentence per line) appeared in 3 posts — reserve for high-emotion or high-stakes moments."
+    },
+    "bullet_points": {
+      "usage": "secondary — used in 2 out of 10 posts as the primary format",
+      "rule": "Use bullets only when listing 3+ parallel items. Never use bullets for the hook or the CTA.",
+      "max_bullets": 6
+    },
+    "numbered_lists": {
+      "usage": "2 out of 10 posts — works well for instructional or ranked content",
+      "rule": "Use numbered lists when sequence or ranking matters. Not for storytelling."
+    },
+    "word_count": {
+      "sweet_spot": "100 to 150 words",
+      "distribution": {
+        "under_100": "2 posts",
+        "100_to_150": "4 posts",
+        "150_to_200": "2 posts",
+        "over_200": "2 posts"
+      },
+      "rule": "Default to 100–150 words. Go longer only when the content is a list or a data-heavy breakdown. Never exceed 250 words."
+    }
+  },
+
+  "credibility_moves": {
+    "rule": "Every post must contain at least one credibility move. Vague posts feel like ads. Specific posts feel like intel.",
+    "ranked_by_frequency": [
+      {
+        "move": "personal_story",
+        "count": "6 out of 10 posts",
+        "instruction": "Write in first person about something you experienced, tried, or observed directly. Not 'companies are doing X' — 'we did X and got Y'."
+      },
+      {
+        "move": "before_after_comparison",
+        "count": "5 out of 10 posts",
+        "instruction": "Show the before state and the after state explicitly. The gap between them is the value of the post."
+      },
+      {
+        "move": "screenshot_or_result",
+        "count": "5 out of 10 posts",
+        "instruction": "Name a real, verifiable outcome. Revenue number, percentage change, time saved, deals closed. Not 'significant improvement'."
+      },
+      {
+        "move": "named_company",
+        "count": "4 out of 10 posts",
+        "instruction": "Name the actual company, tool, or person. 'A major CRM platform' is useless. 'Salesforce' is credible."
+      },
+      {
+        "move": "specific_numbers",
+        "count": "4 out of 10 posts",
+        "instruction": "Use exact numbers. $100B not 'over $100 billion'. 73% not 'almost three quarters'. 12 founders not 'many founders'."
+      },
+      {
+        "move": "named_tools",
+        "count": "3 out of 10 posts",
+        "instruction": "Name the exact tools used. Clay, HubSpot, n8n, GPT-4o. Tool names signal that the advice is actionable, not theoretical."
+      },
+      {
+        "move": "time_frame",
+        "count": "3 out of 10 posts",
+        "instruction": "Anchor outcomes to a specific time. 'In 3 weeks', 'over 2 months', 'last quarter'. Time frames make claims verifiable."
+      }
+    ]
+  },
+
+  "cta_rules": {
+    "dominant_style": "soft_insight_or_reflection",
+    "frequency": "4 out of 10 posts ended with a soft insight or reflection",
+    "approved_endings": [
+      {
+        "type": "soft_insight",
+        "instruction": "End with a one-sentence observation that reframes the whole post. Not a command. A thought the reader can sit with.",
+        "example": "The best CRM isn't the one with the most features. It's the one your team actually uses."
+      },
+      {
+        "type": "link_or_resource",
+        "frequency": "3 out of 10 posts",
+        "instruction": "Only link to something genuinely useful — a tool, a framework, a free resource. Never link just to drive traffic."
+      },
+      {
+        "type": "question_to_reader",
+        "frequency": "1 out of 10 posts",
+        "instruction": "Ask one specific, answerable question. Not 'what do you think?' — 'which of these tools are you already using?'"
+      },
+      {
+        "type": "just_stops",
+        "frequency": "2 out of 10 posts",
+        "instruction": "Sometimes the strongest ending is no ending. If the last line lands hard, don't dilute it with a CTA."
+      }
+    ],
+    "banned_endings": [
+      "Follow me for more",
+      "Like and repost if you agree",
+      "Drop a comment below",
+      "Save this for later",
+      "What are your thoughts?",
+      "I'd love to hear from you"
+    ]
+  },
+
+  "voice_rules": {
+    "persona": "Practitioner-to-practitioner. You are a Sales or RevOps operator at a vertical AI startup talking to peers — not a thought leader broadcasting to followers.",
+    "tone": "Direct, specific, no corporate language. Reads like a Slack message from someone who knows what they're talking about.",
+    "banned_words": [
+      "synergy", "leverage", "disruptive", "game-changer", "unlock",
+      "exciting", "thrilled", "humbled", "journey", "ecosystem",
+      "cutting-edge", "innovative", "best-in-class", "world-class",
+      "empower", "seamless", "robust", "scalable", "paradigm"
+    ],
+    "sentence_structure": "Short sentences. Active voice. Subject-verb-object. No dependent clauses chained together.",
+    "perspective": "First person singular preferred ('I', 'we') over third person ('companies', 'teams', 'organizations')."
+  },
+
+  "startup_spotlight_rules": {
+    "post_structure": [
+      "Line 1: Hook — one of the 5 approved hook types. Must work as a standalone sentence.",
+      "Lines 2–4: Context — what is the CRM problem this startup solves? Ground it in a real pain the reader recognizes.",
+      "Lines 5–8: The insight — what does this startup do differently? Name the tool, name the mechanism, name a real number.",
+      "Final line: Ending — soft insight, question, link, or just stop. Never a generic CTA."
+    ],
+    "required_per_post": [
+      "At least one named tool or company",
+      "At least one specific number, percentage, or time frame",
+      "At least one credibility move from the approved list",
+      "A hook that matches one of the 5 approved types"
+    ],
+    "forbidden_per_post": [
+      "Any word from the banned_words list",
+      "Any opener from banned_openers",
+      "Any ending from banned_endings",
+      "Vague claims without a named source or result",
+      "More than 250 words"
+    ]
+  },
+
+  "ab_hook_rules": {
+    "hook_a": {
+      "type": "number_or_stat",
+      "instruction": "Lead with a specific number, metric, or data point related to the CRM problem the startup solves."
+    },
+    "hook_b": {
+      "type": "contrarian_claim_or_short_punchy_sentence",
+      "instruction": "Lead with a statement that challenges how the reader currently thinks about CRM or sales automation."
+    },
+    "shared_body": "Both hooks connect to the same post body. Only the first line differs.",
+    "selection_guidance": "Hook A typically performs better with data-oriented audiences (RevOps, analysts). Hook B typically performs better with builder audiences (founders, operators)."
+  },
+
+  "comment_reply_rules": {
+    "purpose": "The first comment posted by the author within 30 minutes of publishing. Engineered to trigger LinkedIn's engagement signal.",
+    "structure": [
+      "1–2 sentences expanding on one specific point from the post",
+      "A direct question to prompt replies",
+      "Optional: a link to a related resource"
+    ],
+    "example": "The tool that surprised us most in this stack was Clay — specifically the waterfall enrichment feature. Which CRM enrichment tools are you running right now?",
+    "banned": ["Thanks for reading", "Hope this helps", "Let me know your thoughts"]
+  }
+}

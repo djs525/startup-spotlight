@@ -1,0 +1,93 @@
+{
+  "month": "April 2026",
+  "industry": "Vertical AI & CRM Automation",
+  "weeks": [
+    {
+      "week": 1,
+      "focus_topic": "AI-Native CRM Platforms",
+      "description": "Startups building CRM tools with AI baked in from day one, not bolted on",
+      "example_companies": [
+        "Attio",
+        "HubSpot AI",
+        "Notion CRM",
+        "Pipedrive AI"
+      ],
+      "research_angles": [
+        "How do AI-native CRMs differ from traditional CRMs with AI add-ons?",
+        "What's the retention story for AI-powered workflows?",
+        "Which vertical AI companies are winning in CRM automation?"
+      ],
+      "post_themes": [
+        "The AI CRM architecture shift",
+        "What makes a CRM 'AI-native' vs 'AI-enhanced'",
+        "Real data on AI adoption in CRM workflows"
+      ]
+    },
+    {
+      "week": 2,
+      "focus_topic": "AI Agents for Sales Automation",
+      "description": "Standalone agents and no-code automation platforms automating the entire sales process",
+      "example_companies": [
+        "Clay",
+        "n8n",
+        "Make",
+        "Zapier Teams AI",
+        "Automation Anywhere"
+      ],
+      "research_angles": [
+        "How are founders using AI agents to scale sales without hiring?",
+        "What's the ROI on sales automation in small teams vs enterprises?",
+        "Which AI agent platforms are gaining traction in sales?"
+      ],
+      "post_themes": [
+        "The sales agent revolution: who's building it",
+        "Why teams are choosing no-code automation over custom integrations",
+        "Real case studies: AI agents replacing SDRs"
+      ]
+    },
+    {
+      "week": 3,
+      "focus_topic": "Data Intelligence & Enrichment",
+      "description": "AI companies enriching CRM data in real time, using intelligence to close deals faster",
+      "example_companies": [
+        "Instantly",
+        "HubSpot Data Integration",
+        "RocketReach",
+        "Apollo",
+        "Hunter"
+      ],
+      "research_angles": [
+        "How are AI data enrichment tools changing the prospecting game?",
+        "What's the impact of real-time data enrichment on conversion rates?",
+        "Which startups are winning the vertical AI data race?"
+      ],
+      "post_themes": [
+        "Why data quality is the new competitive advantage in sales",
+        "How AI enrichment is disrupting the prospecting workflow",
+        "The data intelligence stack every founder should know"
+      ]
+    },
+    {
+      "week": 4,
+      "focus_topic": "Conversational AI & Sales Enablement",
+      "description": "AI handling customer conversations, negotiations, and sales enablement at scale",
+      "example_companies": [
+        "Gong",
+        "Chorus",
+        "Outbrain Solutions",
+        "Drift",
+        "Intercom"
+      ],
+      "research_angles": [
+        "How are conversational AI tools improving deal velocity?",
+        "What's the talk-time to close correlation with AI-assisted reps?",
+        "Which conversational AI startups are emerging in the vertical AI space?"
+      ],
+      "post_themes": [
+        "The conversation is the data: why sales AI is different",
+        "How top reps are using AI assistants to land bigger deals",
+        "Conversational AI ROI: what we know so far"
+      ]
+    }
+  ]
+}
