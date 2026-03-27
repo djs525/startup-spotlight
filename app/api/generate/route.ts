@@ -87,7 +87,6 @@ NOW GENERATE 5 POSTS. Make each one distinct. Ground them in the trends above, n
 
 
     const models = [
-      'gemini-2.5-pro',
       'gemini-2.5-flash',
       'gemini-2.5-flash-lite',
     ];
