@@ -126,16 +126,25 @@ NOW GENERATE 5 POSTS. Make each one distinct. Ground them in the trends above, n
 
 
         if (geminiResponse.ok) {
-          console.log(`✓ Generated with ${model}`);
-          break;
+          const tempJson = await geminiResponse.clone().json();
+          const tempContent = tempJson.candidates?.[0]?.content?.parts?.[0]?.text;
+          
+          if (tempContent) {
+            console.log(`✓ Generated with ${model}`);
+            break;
+          } else {
+             lastError = "Response OK but no content (likely safety block): " + JSON.stringify(tempJson);
+             console.warn(`✗ ${model} returned no content, trying next...`);
+             geminiResponse = null; // nullify to force fallback
+             continue;
+          }
         }
 
-
         lastError = await geminiResponse.text();
-        console.warn(`✗ ${model} failed, trying next...`);
+        console.warn(`✗ ${model} failed, trying next... Error: ${lastError}`);
       } catch (error) {
         lastError = String(error);
-        console.warn(`✗ ${model} error, trying next...`);
+        console.warn(`✗ ${model} error, trying next... Error: ${lastError}`);
       }
     }
 
