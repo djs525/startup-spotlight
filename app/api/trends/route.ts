@@ -4,17 +4,25 @@ import { GET as getRedditTrends } from './reddit/route';
 import path from 'path';
 import fs from 'fs';
 
-export async function GET() {
+export const dynamic = 'force-dynamic';
+
+export async function GET(requestOrWeek?: Request | number) {
   try {
-    // Get the current week (for month1.json rotation)
-    const now = new Date();
-    const dayOfYear = Math.floor(
-      (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000
-    );
-    const weekOfYear = Math.ceil((dayOfYear + new Date(new Date().getFullYear(), 0, 1).getDay() + 1) / 7);
-    // Force Week 1 for the demo (previously calculated based on the current date, which fell into Week 4)
-    const weekInMonth = 1;
-    // Load month1.json to get the current week's topic
+    // Check if the parameter passed was an explicit week number (internal call) 
+    // or a Request object (HTTP call). Default to Week 1.
+    let weekInMonth = 1;
+
+    if (typeof requestOrWeek === 'number') {
+      weekInMonth = requestOrWeek;
+    } else if (requestOrWeek && 'url' in requestOrWeek) {
+      const url = new URL(requestOrWeek.url);
+      weekInMonth = parseInt(url.searchParams.get('week') || '1', 10);
+    }
+
+    // Validate week range (1 to 4)
+    if (weekInMonth < 1 || weekInMonth > 4) weekInMonth = 1;
+
+    // Load month1.json to get the selected week's topic
     const configPath = path.join(process.cwd(), 'config', 'month1.json');
     const configData = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     const currentWeek = configData.weeks[weekInMonth - 1] || configData.weeks[0];

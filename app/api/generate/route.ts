@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server';
 import { GET as getTrends } from '../trends/route';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import path from 'path';
 import fs from 'fs';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const selectedWeek = parseInt(searchParams.get('week') || '1', 10);
+
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
@@ -14,7 +20,7 @@ export async function GET() {
     }
 
     // Fetch trends directly via the handler rather than a network request
-    const trendsResponse = await getTrends();
+    const trendsResponse = await getTrends(selectedWeek);
     if (trendsResponse.status !== 200) {
       return NextResponse.json(
         { error: 'Failed to fetch trends internally' },

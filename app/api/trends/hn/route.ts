@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 
 interface HNStory {
   title: string;
@@ -13,6 +14,7 @@ export async function GET() {
     const url = `https://hn.algolia.com/api/v1/search?query=${query}&tags=story&hitsPerPage=5`;
 
     const response = await fetch(url, {
+      cache: 'no-store',
       headers: {
         'User-Agent': 'Startup-Spotlight/1.0',
       },

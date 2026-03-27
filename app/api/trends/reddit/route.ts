@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
 
 interface RedditPost {
   title: string;
@@ -12,6 +13,7 @@ async function fetchSubreddit(subreddit: string): Promise<RedditPost[]> {
   const url = `https://www.reddit.com/r/${subreddit}/top.json?limit=5&t=week`;
 
   const response = await fetch(url, {
+    cache: 'no-store',
     headers: {
       'User-Agent': 'Startup-Spotlight/1.0 (built with Node.js)',
     },

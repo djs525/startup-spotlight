@@ -18,12 +18,20 @@ interface GeneratedResponse {
   error?: string;
 }
 
+const AGENDA = [
+  { week: 1, topic: "AI-Native CRM Platforms" },
+  { week: 2, topic: "AI Agents for Sales Automation" },
+  { week: 3, topic: "Data Intelligence & Enrichment" },
+  { week: 4, topic: "Conversational AI & Sales Enablement" },
+];
+
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [focusTopic, setFocusTopic] = useState<string>('');
   const [week, setWeek] = useState<number>(0);
+  const [selectedWeek, setSelectedWeek] = useState<number>(1);
 
   const generatePosts = async () => {
     setLoading(true);
@@ -31,7 +39,7 @@ export default function Home() {
     setPosts([]);
 
     try {
-      const response = await fetch('/api/generate');
+      const response = await fetch(`/api/generate?week=${selectedWeek}`);
       const data: GeneratedResponse = await response.json();
 
       if (!response.ok || !data.success) {
@@ -62,16 +70,36 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Week Selector Agenda */}
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">April Content Agenda</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {AGENDA.map((item) => (
+              <button
+                key={item.week}
+                onClick={() => setSelectedWeek(item.week)}
+                className={`p-4 rounded-lg border text-left transition-colors ${selectedWeek === item.week
+                  ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:border-blue-500'
+                  : 'border-gray-200 bg-white hover:border-blue-300 dark:bg-zinc-900 dark:border-zinc-700 dark:hover:border-zinc-500'
+                  }`}
+              >
+                <span className="block text-sm font-semibold text-blue-600 dark:text-blue-400 mb-1">Week {item.week}</span>
+                <span className="block text-gray-900 dark:text-gray-100 font-medium">{item.topic}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Generate Button */}
         <div className="mb-12 text-center">
           <button
             onClick={generatePosts}
             disabled={loading}
-            className="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center justify-center px-8 py-3 w-full sm:w-auto rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? 'Generating...' : 'Generate Posts'}
+            {loading ? 'Analyzing Trends & Generating...' : `Generate Posts for Week ${selectedWeek}`}
           </button>
-          {loading && <p className="text-sm text-gray-500 mt-2">This may take 15-30 seconds...</p>}
+          {loading && <p className="text-sm text-gray-500 mt-3 animate-pulse">This usually takes 15-30 seconds. Do not refresh.</p>}
         </div>
 
         {/* Error State */}
