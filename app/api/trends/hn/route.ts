@@ -29,7 +29,6 @@ export async function GET() {
 
     const data = await response.json();
 
-    // Parse and clean the response
     const stories: HNStory[] = (data.hits || [])
       .map((hit: any) => ({
         title: hit.title || 'Untitled',
@@ -37,7 +36,7 @@ export async function GET() {
         points: hit.points || 0,
         num_comments: hit.num_comments || 0,
       }))
-      .slice(0, 5); // Ensure we only return 5
+      .slice(0, 5);
 
     return NextResponse.json({
       source: 'hacker_news',

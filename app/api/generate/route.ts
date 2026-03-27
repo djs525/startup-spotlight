@@ -19,7 +19,6 @@ export async function GET(request: Request) {
       );
     }
 
-    // Fetch trends directly via the handler rather than a network request
     const trendsResponse = await getTrends(selectedWeek);
     if (trendsResponse.status !== 200) {
       return NextResponse.json(
@@ -29,11 +28,9 @@ export async function GET(request: Request) {
     }
     const trendsData = await trendsResponse.json();
 
-    // Read style guide
     const styleGuidePath = path.join(process.cwd(), 'prompts', 'style_guide.json');
     const styleGuideData = JSON.parse(fs.readFileSync(styleGuidePath, 'utf-8'));
 
-    // Build prompt for Gemini
     const systemPrompt = `You are an elite B2B SaaS LinkedIn ghostwriter specializing in Vertical AI & CRM Automation for an audience of founders, sales operators, and RevOps professionals.
 
 Your task is to generate 5 unique, high-engagement LinkedIn posts based on the latest trends and our brand style guide.
@@ -88,7 +85,7 @@ EXECUTION REMINDERS:
 
 NOW GENERATE 5 POSTS. Make each one distinct. Ground them in the trends above, not in invented scenarios.`;
 
-    // Call Gemini API with fallback models
+
     const models = [
       'gemini-2.5-pro',
       'gemini-2.5-flash',
@@ -127,13 +124,13 @@ NOW GENERATE 5 POSTS. Make each one distinct. Ground them in the trends above, n
           }
         );
 
-        // If successful, break out of loop
+
         if (geminiResponse.ok) {
           console.log(`✓ Generated with ${model}`);
           break;
         }
 
-        // If 404 or unavailable, try next model
+
         lastError = await geminiResponse.text();
         console.warn(`✗ ${model} failed, trying next...`);
       } catch (error) {
@@ -160,18 +157,14 @@ NOW GENERATE 5 POSTS. Make each one distinct. Ground them in the trends above, n
       );
     }
 
-    // Parse JSON from response
     let posts: any;
     try {
       let cleanContent = generatedContent.replace(/```json\s*/ig, '').replace(/```\s*/g, '').trim();
-
-      // Find the outermost JSON container (could be array or object)
       const firstCurly = cleanContent.indexOf('{');
       const firstSquare = cleanContent.indexOf('[');
       const lastCurly = cleanContent.lastIndexOf('}');
       const lastSquare = cleanContent.lastIndexOf(']');
 
-      // Identify the first occurrence that's valid
       const startIdx = Math.min(
         firstCurly === -1 ? Infinity : firstCurly,
         firstSquare === -1 ? Infinity : firstSquare

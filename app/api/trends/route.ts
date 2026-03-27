@@ -8,8 +8,6 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(requestOrWeek?: Request | number) {
   try {
-    // Check if the parameter passed was an explicit week number (internal call) 
-    // or a Request object (HTTP call). Default to Week 1.
     let weekInMonth = 1;
 
     if (typeof requestOrWeek === 'number') {
@@ -19,15 +17,12 @@ export async function GET(requestOrWeek?: Request | number) {
       weekInMonth = parseInt(url.searchParams.get('week') || '1', 10);
     }
 
-    // Validate week range (1 to 4)
     if (weekInMonth < 1 || weekInMonth > 4) weekInMonth = 1;
 
-    // Load month1.json to get the selected week's topic
     const configPath = path.join(process.cwd(), 'config', 'month1.json');
     const configData = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     const currentWeek = configData.weeks[weekInMonth - 1] || configData.weeks[0];
 
-    // Instead of doing expensive/flaky HTTP fetches to ourselves, directly invoke the route handlers!
     const [hnResponse, redditResponse] = await Promise.all([
       getHnTrends(),
       getRedditTrends(),

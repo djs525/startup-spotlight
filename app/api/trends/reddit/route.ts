@@ -26,7 +26,6 @@ async function fetchSubreddit(subreddit: string): Promise<RedditPost[]> {
 
   const data = await response.json();
 
-  // Parse Reddit's nested response structure
   const posts: RedditPost[] = (data.data?.children || [])
     .map((child: any) => {
       const post = child.data;
@@ -45,7 +44,6 @@ async function fetchSubreddit(subreddit: string): Promise<RedditPost[]> {
 
 export async function GET() {
   try {
-    // Fetch from both subreddits in parallel
     const [salesPosts, startupsPosts] = await Promise.all([
       fetchSubreddit('sales'),
       fetchSubreddit('startups'),
